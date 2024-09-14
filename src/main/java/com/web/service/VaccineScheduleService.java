@@ -97,18 +97,18 @@ public class VaccineScheduleService {
         return vaccineSchedule.get();
     }
 
-    public List<VaccineSchedule> nextSchedule(String param){
+    public Page<VaccineSchedule> nextSchedule(String param, Pageable pageable){
         if(param == null){
             param = "";
         }
         param = "%"+param+"%";
-        List<VaccineSchedule> list = vaccineScheduleRepository.findByParam(param, LocalDateTime.now());
-        for(VaccineSchedule v : list){
+        Page<VaccineSchedule> page = vaccineScheduleRepository.findByParam(param, LocalDateTime.now(), pageable);
+        for(VaccineSchedule v : page.getContent()){
             if(customerScheduleRepository.countRegis(v.getId()) < v.getLimitPeople()){
                 v.setInStock(true);
             }
         }
-        return list;
+        return page;
     }
 
     public Page<VaccineSchedule> preSchedule(String param, Pageable pageable){

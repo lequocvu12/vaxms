@@ -23,6 +23,10 @@ public class Chatting {
 
     private Timestamp createdDate;
 
+    private Boolean isFile = false;
+
+    private String fileName;
+
     @ManyToOne
     @JoinColumn(name = "sender")
     private User sender;

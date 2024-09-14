@@ -21,7 +21,7 @@ public interface VaccineScheduleRepository extends JpaRepository<VaccineSchedule
     public List<VaccineSchedule> findByVacxin(Long vacxinId, LocalDateTime now);
 
     @Query("select v from VaccineSchedule v where v.vaccine.name like ?1 and v.endDate> ?2")
-    public List<VaccineSchedule> findByParam(String param, LocalDateTime now);
+    public Page<VaccineSchedule> findByParam(String param, LocalDateTime now, Pageable pageable);
 
     @Query("select v from VaccineSchedule v where v.vaccine.name like ?1 and v.endDate <= ?2")
     public Page<VaccineSchedule> preFindByParam(String param, LocalDateTime now, Pageable pageable);

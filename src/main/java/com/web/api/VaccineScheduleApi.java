@@ -62,8 +62,8 @@ public class VaccineScheduleApi {
 
 
     @GetMapping("/public/next-schedule")
-    public ResponseEntity<?> nextSchedule(@RequestParam(required = false) String param){
-        List<VaccineSchedule> result = vaccineScheduleService.nextSchedule(param);
+    public ResponseEntity<?> nextSchedule(Pageable pageable, @RequestParam(required = false) String param){
+        Page<VaccineSchedule> result = vaccineScheduleService.nextSchedule(param, pageable);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
