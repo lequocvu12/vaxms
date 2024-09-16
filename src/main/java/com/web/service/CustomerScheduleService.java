@@ -72,6 +72,17 @@ public class CustomerScheduleService {
         return customerSchedule;
     }
 
+    public CustomerSchedule create(CustomerSchedule customerSchedule){
+        User user = userUtils.getUserWithAuthority();
+
+        customerSchedule.setUser(user);
+        customerSchedule.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+        customerSchedule.setStatusCustomerSchedule(StatusCustomerSchedule.pending);
+        customerSchedule.setPayStatus(false);
+        return customerScheduleRepository.save(customerSchedule);
+    }
+
+
     public List<CustomerSchedule> mySchedule(){
         User user = userUtils.getUserWithAuthority();
         List<CustomerSchedule> list = customerScheduleRepository.findByUser(user.getId());

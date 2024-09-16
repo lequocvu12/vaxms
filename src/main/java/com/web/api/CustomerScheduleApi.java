@@ -26,6 +26,12 @@ public class CustomerScheduleApi {
         return new ResponseEntity(result, HttpStatus.CREATED);
     }
 
+    @PostMapping("/customer/create-offline")
+    public ResponseEntity<?> create(@RequestBody CustomerSchedule customerSchedule) {
+        CustomerSchedule result = customerScheduleService.create(customerSchedule);
+        return new ResponseEntity(result, HttpStatus.CREATED);
+    }
+
     @GetMapping("/customer/my-schedule")
     public ResponseEntity<?> mySchedule() {
         List<CustomerSchedule> result = customerScheduleService.mySchedule();
